@@ -2,11 +2,7 @@ from typing import List, Tuple
 
 
 def chronological_90_10_split(events: List[Tuple[int, int, int]]):
-    """
-    events: list of (user_id, item_id, timestamp), already sorted by timestamp
-    train = first 90%
-    test = last 10%
-    """
+
     events_sorted = sorted(events, key=lambda x: x[2])
 
     cutoff = int(0.9 * len(events_sorted))

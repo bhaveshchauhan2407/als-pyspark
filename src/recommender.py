@@ -2,11 +2,7 @@ import numpy as np
 
 
 def recommend_top_k(model, raw_user_id, k=10):
-    """
-    Recommend top-k items for one raw user_id.
-    Excludes items already seen in training.
-    Returns raw item IDs.
-    """
+
     if raw_user_id not in model.user_to_index:
         return []
 

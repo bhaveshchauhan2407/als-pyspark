@@ -6,13 +6,6 @@ from src.predict import predict_score
 
 
 class FastALSModel:
-    """
-    Beginner-friendly Python skeleton of the Java MF_fastALS class.
-
-    This version keeps the structure of the Java code,
-    but does not yet implement full PySpark/RDD training.
-    """
-
     def __init__(
         self,
         interactions: List[Tuple[int, int]],
@@ -21,39 +14,26 @@ class FastALSModel:
         self.config = config
         self.interactions = interactions
 
-        # Build sorted user/item index sets
         self.user_ids = sorted({u for u, _ in interactions})
         self.item_ids = sorted({i for _, i in interactions})
-
         self.user_count = len(self.user_ids)
         self.item_count = len(self.item_ids)
 
-        # Map raw IDs to matrix row/column indices
         self.user_to_index = {u: idx for idx, u in enumerate(self.user_ids)}
         self.item_to_index = {i: idx for idx, i in enumerate(self.item_ids)}
-
         self.index_to_user = {idx: u for u, idx in self.user_to_index.items()}
         self.index_to_item = {idx: i for i, idx in self.item_to_index.items()}
 
-        # Training matrix structures (Python replacements for SparseMatrix access)
         self.user_items = self._build_user_items()
         self.item_users = self._build_item_users()
-
-        # Positive weights W(u, i)
         self.W = self._build_positive_weights()
-
-        # Negative item weights Wi[i]
         self.Wi = self._compute_item_missing_weights()
 
-        # Model parameters U and V
         self.U = None
         self.V = None
-
-        # Caches SU and SV
         self.SU = None
         self.SV = None
 
-        # Helper arrays used in Java code
         self.prediction_users = np.zeros(self.user_count)
         self.prediction_items = np.zeros(self.item_count)
         self.rating_users = np.zeros(self.user_count)
@@ -81,9 +61,7 @@ class FastALSModel:
         return item_users
 
     def _build_positive_weights(self) -> Dict[Tuple[int, int], float]:
-        """
-        Java sets positive interaction weights to 1 by default.
-        """
+
         weights = {}
         for raw_u, raw_i in self.interactions:
             u = self.user_to_index[raw_u]
@@ -92,9 +70,7 @@ class FastALSModel:
         return weights
 
     def _compute_item_missing_weights(self) -> np.ndarray:
-        """
-        Python equivalent of Wi computation from the Java constructor.
-        """
+
         item_popularity = np.zeros(self.item_count)
 
         for i in range(self.item_count):
@@ -115,9 +91,7 @@ class FastALSModel:
         return wi
 
     def _initialize_factors(self) -> None:
-        """
-        Initialize U and V like Java DenseMatrix.init(mean, stdev).
-        """
+
         np.random.seed(self.config.random_seed)
 
         self.U = np.random.normal(
@@ -133,11 +107,7 @@ class FastALSModel:
         )
 
     def _init_caches(self) -> None:
-        """
-        Equivalent of Java initS():
-        SU = U^T U
-        SV = V^T * diag(Wi) * V
-        """
+
         self.SU = self.U.T @ self.U
 
         weighted_V = self.V * self.Wi[:, np.newaxis]
@@ -147,18 +117,14 @@ class FastALSModel:
         return predict_score(self.U[u], self.V[i])
 
     def set_train(self, interactions: List[Tuple[int, int]]) -> None:
-        """
-        Python placeholder version of setTrain(...)
-        """
+
         self.interactions = interactions
         self.user_items = self._build_user_items()
         self.item_users = self._build_item_users()
         self.W = self._build_positive_weights()
 
     def set_uv(self, U: np.ndarray, V: np.ndarray) -> None:
-        """
-        Python version of setUV(...)
-        """
+
         self.U = U.copy()
         self.V = V.copy()
         self._init_caches()
@@ -216,9 +182,7 @@ class FastALSModel:
 
 
     def update_model(self, raw_user_id: int, raw_item_id: int, w_new: float = 4.0, online_iter: int = 1):
-        """
-        Python approximation of Java updateModel(u, i).
-        """
+
         if raw_user_id not in self.user_to_index:
             u = self._add_new_user(raw_user_id)
         else:
@@ -241,9 +205,7 @@ class FastALSModel:
             self.update_item(i)
 
     def loss(self):
-        """
-        Python version of the fast loss computation in the Java code.
-        """
+
         reg_loss = self.config.reg * (np.sum(self.U ** 2) + np.sum(self.V ** 2))
         total_loss = reg_loss
 

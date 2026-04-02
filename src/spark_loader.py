@@ -43,10 +43,7 @@ def load_yelp_interactions_spark(spark, path: str, limit_rows: int = 5000):
 
 
 def load_yelp_events_spark(spark, path: str, limit_rows: int = 5000):
-    """
-    For online protocol:
-    keep timestamp and do NOT drop duplicates.
-    """
+
     raw_df = spark.read.text(path)
     parts = F.split(F.trim(F.col("value")), r"\s+")
 
