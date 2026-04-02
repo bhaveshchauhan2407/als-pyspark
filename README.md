@@ -14,8 +14,6 @@ The original paper presents a fast element-wise ALS approach for matrix factoriz
 The original author implementation is in Java.  
 Our project translates the main logic into Python, while using **PySpark DataFrames and RDDs** for data loading and preprocessing.
 
-This project is designed for a DBMS experimental analysis assignment, not as a production recommender system.
-
 ---
 
 ## 2. Main objective of our implementation
