@@ -8,7 +8,6 @@ def main():
 
     data_path = "data/yelp.rating"
 
-    # Start with 10k rows. Later you can try 20k.
     df = load_yelp_interactions_spark(spark, data_path, limit_rows=10000)
 
     interactions_rdd = spark_df_to_rdd(df)
