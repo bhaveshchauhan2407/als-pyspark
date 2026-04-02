@@ -3,10 +3,7 @@ import pandas as pd
 
 
 def load_interactions_csv(path: str) -> pd.DataFrame:
-    """
-    Load Yelp ratings file:
-    user_id item_id rating timestamp
-    """
+
     df = pd.read_csv(
         path,
         sep=r"\s+",
@@ -14,8 +11,6 @@ def load_interactions_csv(path: str) -> pd.DataFrame:
         names=["user_id", "item_id", "rating", "timestamp"],
         nrows=5000
     )
-
-    # Keep only implicit signal: interaction happened
     df = df[["user_id", "item_id"]].drop_duplicates().reset_index(drop=True)
 
     return df
