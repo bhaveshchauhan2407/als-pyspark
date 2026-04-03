@@ -1,4 +1,4 @@
-## ALS-PySpark: Fast Matrix Factorization for Online Recommendation
+## eALS-PySpark: Fast Matrix Factorization for Online Recommendation
 
 This project is a PySpark implementation of the **Fast Matrix Factorization for Online Recommendation with Implicit Feedback** algorithm, based on the paper by He et al. (SIGIR 2016). It was developed as part of our Database Management course APM_50443_EP.
 
