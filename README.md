@@ -42,7 +42,7 @@ The implementation was evaluated under two protocols:
 - **Offline Protocol** — leave-one-out evaluation on static historical data
 - **Online Protocol** — simulated data stream using chronological split (90% train / 10% test)
 
-Metrics used: **Hit Ratio (HR)** and **Normalized Discounted Cumulative Gain (NDCG)** at top-10 & top-100.
+Metrics used: **Hit Ratio (HR)** and **Normalized Discounted Cumulative Gain (NDCG)** at top-10.
 
 ### Reference
 > Xiangnan He, Hanwang Zhang, Min-Yen Kan, Tat-Seng Chua. *Fast Matrix Factorization for Online Recommendation with Implicit Feedback*. SIGIR 2016. DOI: 10.1145/2911451.2911489
