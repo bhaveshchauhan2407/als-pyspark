@@ -577,7 +577,7 @@ Shows how popularity-aware weighting affects performance.
 Shows convergence behavior and diminishing returns of more training iterations.
 
 ### scalability sweep
-Shows how runtime and metrics change as dataset size grows.
+Shows how runtime and metrics change as the dataset size grows.
 
 This is especially important because the grading rubric explicitly mentions **scalability**.
 
