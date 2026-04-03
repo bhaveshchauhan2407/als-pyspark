@@ -5,9 +5,9 @@ This project is a PySpark implementation of the **Fast Matrix Factorization for 
 **Contributors:** Bhavesh CHAUHAN & Korouhanba Khuman LAIKHURAM
 
 ### Background
-Traditional recommendation systems rely on explicit feedback such as star ratings. In reality, most user data is implicit — purchases, views, clicks — and lacks clear negative signals. This project tackles that challenge by implementing the eALS (element-wise Alternating Least Squares) algorithm, which learns user and item representations from implicit feedback efficiently and supports real-time model updates.
+Traditional recommendation systems rely on explicit feedback such as star ratings. In reality, most user data is implicit for example purchases, views, clicks and lacks clear negative signals. This project tackles that challenge by implementing the eALS (element-wise Alternating Least Squares) algorithm, which learns user and item representations from implicit feedback efficiently and supports real-time model updates.
 
-The core idea is that instead of treating all unobserved interactions equally, the algorithm weights missing data based on item popularity — popular items a user ignored are more likely to be true negatives.
+The core idea is that instead of treating all unobserved interactions equally, the algorithm weights missing data based on item popularity meaning popular items a user ignored are more likely to be true negatives.
 
 ### Implementions
 
